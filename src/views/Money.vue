@@ -1,9 +1,36 @@
 <template>
-  <div>
-
-    <h1>Money</h1>
-
-    <Nav></Nav>
+  <div class="nav-warpper">
+    <div class="content">
+      <h1>Money</h1>
+          <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+      <h1>Money</h1>
+    </div>
+    <div>
+      <Nav></Nav>
+    </div>
   </div>
 </template>
 
@@ -16,5 +43,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.nav-warpper{
+  border: 1px solid black;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.content{
+  flex-grow: 1;
+  overflow: auto;
+}
 </style>
