@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Labels</h1>
+
+    <Nav></Nav>
+
   </div>
 </template>
 
