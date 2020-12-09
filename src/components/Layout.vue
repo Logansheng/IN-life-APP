@@ -15,7 +15,6 @@ export default {
 
 <style lang="scss" scoped>
 .nav-warpper{
-  border: 1px solid black;
   height: 100vh;
   display: flex;
   flex-direction: column;

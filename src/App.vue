@@ -11,6 +11,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,15 +23,13 @@
 }
 
 #nav {
-  padding: 10px;
+  padding: 6px;
 
   a {
     font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    color: inherit;
+    text-decoration: none;
+    font-size: 12px;
   }
 }
 </style>
