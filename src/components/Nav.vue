@@ -1,14 +1,17 @@
 <template>
   <div id="nav">
-    <router-link to="/money" class="item" active-class="x">
+    <router-link to="/money" class="item">
       <Icon name="money" class="icon"></Icon>
-      记账</router-link>
-    <router-link to="/labels" class="item" active-class="x">
+      记账
+    </router-link>
+    <router-link to="/labels" class="item">
       <Icon name="labels" class="icon"></Icon>
-      标签</router-link>
-    <router-link to="/statistics" class="item" active-class="x">
+      标签
+    </router-link>
+    <router-link to="/statistics" class="item">
       <Icon name="statistics" class="icon"></Icon>
-      统计</router-link>
+      统计
+    </router-link>
   </div>
 </template>
 
@@ -19,11 +22,14 @@ name: "Nav",
 </script>
 
 <style lang="scss" scoped>
-#nav{
+@import "~@/assets/style/helper.scss";
+#nav {
+  padding: 6px;
   display: flex;
   flex-direction: row;
-  box-shadow: 0 0 3px rgba(0,0,0,0.25);
-  >.item{
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+
+  > .item {
     justify-content: center;
     width: 33.3333%;
     display: flex;
@@ -31,8 +37,9 @@ name: "Nav",
     flex-direction: column;
 
   }
->.item.x{
-  color: #42b983;
-}
+
+  > .router-link-active {
+    color: $color-routercolor;
+  }
     }
 </style>
