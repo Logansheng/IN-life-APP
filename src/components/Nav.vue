@@ -27,7 +27,7 @@ name: "Nav",
   padding: 6px;
   display: flex;
   flex-direction: row;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  @extend %outerShadow;
 
   > .item {
     justify-content: center;

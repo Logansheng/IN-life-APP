@@ -9,3 +9,9 @@ a {
   text-decoration: none;
   font-size: 12px;
 }
+ul,ol{
+  list-style: none;
+}
+:focus{
+  outline: none;
+}
