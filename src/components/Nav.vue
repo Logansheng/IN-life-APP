@@ -35,7 +35,10 @@ name: "Nav",
     display: flex;
     align-items: center;
     flex-direction: column;
-
+    >.icon{
+      height: 30px;
+      width: 30px;
+    }
   }
 
   > .router-link-active {
