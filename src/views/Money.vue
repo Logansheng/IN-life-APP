@@ -1,9 +1,9 @@
 <template>
-  <Layout>
-    <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"></NumberPad>
-    <Types @update:value="onUpdateType"></Types>
-    <Notes @update:value="onUpdateNotes"></Notes>
-    <Tags :data-source="tags" @update:value="onUpdateTags"></Tags>
+  <Layout class-prefix="layout">
+      <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"></NumberPad>
+      <Notes @update:value="onUpdateNotes"></Notes>
+      <Types @update:value="onUpdateType"></Types>
+      <Tags :data-source="tags" @update:value="onUpdateTags" class="save"></Tags>
   </Layout>
 </template>
 
@@ -39,7 +39,6 @@ export default class Money extends Vue {
 
   onUpdateType(value: string) {
     this.record.type = value;
-
   }
 
   onUpdateAmount(value: string) {
@@ -57,3 +56,14 @@ export default class Money extends Vue {
 }
 
 </script>
+
+<style lang="scss">
+.layout-content{
+  display: flex;
+  flex-direction: column-reverse;
+}
+</style>
+
+<style lang="scss" scoped>
+
+</style>
