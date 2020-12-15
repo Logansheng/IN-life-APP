@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="layout">
       <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"></NumberPad>
-      <Notes @update:value="onUpdateNotes"></Notes>
+      <Notes @update:value="onUpdateNotes" field-name="备注" placeholder="在这里输入备注"></Notes>
       <Types @update:value="onUpdateType"></Types>
       <Tags :data-source.sync="tags" @update:value="onUpdateTags" class="save"></Tags>
   </Layout>

@@ -1,6 +1,10 @@
 <template>
 <Layout>
-  编辑栏
+ <div>
+   <Icon name="left"></Icon>
+   <span>编辑栏</span>
+<Notes field-name="标签名" placeholder=请输入标签名></Notes>
+ </div>
 </Layout>
 </template>
 
@@ -8,8 +12,10 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator'
 import tagModel from '@/model/tag-model';
-
-@Component
+import Notes from '@/components/Money/Notes.vue';
+@Component({
+  components: {Notes}
+})
 export default class EditLabel extends Vue {
 created(){
   const id=this.$route.params.id
