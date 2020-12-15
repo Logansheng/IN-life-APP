@@ -3,7 +3,7 @@
       <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"></NumberPad>
       <Notes @update:value="onUpdateNotes"></Notes>
       <Types @update:value="onUpdateType"></Types>
-      <Tags :data-source="tags" @update:value="onUpdateTags" class="save"></Tags>
+      <Tags :data-source.sync="tags" @update:value="onUpdateTags" class="save"></Tags>
   </Layout>
 </template>
 
@@ -17,8 +17,8 @@ import {Component, Watch} from 'vue-property-decorator';
 import localModel from '@/model/local-model';
 import tagModel from '@/model/tag-model';
 
-const tagList=tagModel.fetch()
-const recordList: RecordItem[]=localModel.fetch()
+const tagList = tagModel.fetch();
+const recordList = localModel.fetch();
 @Component(
   {
     components: {Tags, Notes, Types, NumberPad},
@@ -26,7 +26,7 @@ const recordList: RecordItem[]=localModel.fetch()
 )
 export default class Money extends Vue {
   tags = tagList;
-  recordList: RecordItem[] = recordList
+  recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0,
   };
@@ -47,7 +47,7 @@ export default class Money extends Vue {
     this.record.amount = parseFloat(value);
   }
   saveRecord(){
-    const record2: RecordItem = localModel.clone(this.record);
+    const record2 = localModel.clone(this.record);
     record2.time= new Date()
     this.recordList.push(record2)
   }
