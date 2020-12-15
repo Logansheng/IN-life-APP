@@ -1,15 +1,18 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left"></Icon>
+      <Icon class="leftIcon" name="left" @click="goback"></Icon>
       <span class="title">编辑栏</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormItem :value="tag.name" field-name="标签名" placeholder=请输入标签名></FormItem>
+      <FormItem :value="tag.name" field-name="标签名"
+                placeholder=请输入标签名
+                @update:value="update"
+      ></FormItem>
     </div>
     <div class="button-wrapper">
-      <Button>删除标签</Button>
+      <Button @click="remove">删除标签</Button>
     </div>
   </Layout>
 </template>
@@ -38,7 +41,19 @@ export default class EditLabel extends Vue {
     } else {
       this.$router.replace('/NotFound');
     }
-
+  }
+  update(name: string) {
+    if (this.tag) {
+      tagModel.update(this.tag.id, name);
+    }
+  }
+  remove(){
+    if(this.tag){
+      tagModel.remove(this.tag.id)
+    }
+  }
+  goback(){
+    this.$router.back()
   }
 }
 </script>
@@ -57,8 +72,9 @@ export default class EditLabel extends Vue {
   }
 
   > .leftIcon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+    color: #666666;
   }
 
   > .rightIcon {
