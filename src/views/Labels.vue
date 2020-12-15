@@ -1,6 +1,5 @@
 <template>
   <Layout class="context">
-
     <div class="taggs">
       <router-link :to="`/labels/edit/${tag.id}`"
                    class="tagg" v-for="tag in tags"
@@ -10,7 +9,7 @@
       </router-link>
     </div>
     <div class="newTag-wrapper">
-      <button @click="createTag" class="newTag">新建标签</button>
+      <Button @click="createTag" class="newTag">新建标签</Button>
     </div>
   </Layout>
 </template>
@@ -19,9 +18,12 @@
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import tagModel from '@/model/tag-model';
+import Button from '@/components/Button.vue';
 
 tagModel.fetch();
-@Component
+@Component({
+  components: {Button}
+})
 export default class Labels extends Vue {
   tags = tagModel.fetch();
 
