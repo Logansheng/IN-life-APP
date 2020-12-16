@@ -47,13 +47,11 @@ export default class Money extends Vue {
     this.record.amount = parseFloat(value);
   }
   saveRecord(){
-    const record2 = localModel.clone(this.record);
-    record2.time= new Date()
-    this.recordList.push(record2)
+   localModel.create(this.record)
   }
 @Watch('recordList')
   onRecordListChange(){
-    localModel.save(this.recordList)
+    localModel.save()
 }
 }
 
