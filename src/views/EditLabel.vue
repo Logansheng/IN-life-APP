@@ -20,9 +20,9 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
-import tagModel from '@/model/tag-model';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
+import store from '@/store/index2';
 
 @Component({
   components: {Button, FormItem}
@@ -32,30 +32,28 @@ export default class EditLabel extends Vue {
   tag?: { id: string; name: string } = undefined;
 
   created() {
-    const id = this.$route.params.id;
-    tagModel.fetch();
-    const tags = tagModel.data;
-    const tag = tags.filter(t => t.id === id)[0];
-    if (tag) {
-      this.tag=tag
-    } else {
+    this.tag = store.findTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace('/NotFound');
     }
   }
+
   update(name: string) {
     if (this.tag) {
-      tagModel.update(this.tag.id, name);
+      store.updateTag(this.tag.id, name);
     }
   }
-  remove(){
-    if(this.tag){
-     if(tagModel.remove(this.tag.id)){
-       this.$router.back()
-     }
+
+  remove() {
+    if (this.tag) {
+      if (store.removeTag(this.tag.id)) {
+        this.$router.back();
+      }
     }
   }
-  goback(){
-    this.$router.back()
+
+  goback() {
+    this.$router.back();
   }
 }
 </script>

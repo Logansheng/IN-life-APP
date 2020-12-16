@@ -1,8 +1,8 @@
 <template>
   <div class="tags">
-    <div class="new ">
-      <button @click="create">新增标签</button>
-    </div>
+    <router-link to="/labels" class="new ">
+      <button>新增标签</button>
+    </router-link>
     <ul class="current">
       <li :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)"
@@ -20,7 +20,7 @@ import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
-  @Prop() readonly dataSource: string[] | undefined;
+  @Prop() readonly dataSource!: string[];
   selectedTags: string[] = [];
 
   toggle(tag: string) {
@@ -32,15 +32,15 @@ export default class Tags extends Vue {
     }
     this.$emit('update:value', this.selectedTags);
   }
-  create(){
-    const name = window.prompt('请输入标签名')
-    if(name ===''){
-      window.alert('标签名不能为空')
-    }else if(this.dataSource){
-      this.$emit('update:dataSource',
-        [...this.dataSource, name]);
-    }
-  }
+  // create(){
+  //   const name = window.prompt('请输入标签名')
+  //   if(name ===''){
+  //     window.alert('标签名不能为空')
+  //   }else if(this.dataSource){
+  //     this.$emit('update:dataSource',
+  //       [...this.dataSource, name]);
+  //   }
+  // }
 }
 </script>
 
