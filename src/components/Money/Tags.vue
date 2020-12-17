@@ -18,10 +18,20 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 
-@Component
+@Component({
+  computed: {
+    tagList(){
+      return this.$store.state.tagList;
+    }
+  }
+})
 export default class Tags extends Vue {
   @Prop() readonly dataSource!: string[];
   selectedTags: string[] = [];
+
+  created() {
+    this.$store.commit('fetchTags');
+  }
 
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);

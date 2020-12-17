@@ -1,29 +1,3 @@
-// import tagModel from '@/model/tag-model';
-//
-// export default {
-//   findTag(id: string) {
-//     return this.tagList.filter(t => t.id === id)[0];
-//   },
-//   tagList: tagModel.fetch(),
-//   createTag: (name: string) => {
-//     const message = tagModel.create(name);
-//     if (name) {
-//       if (message === 'duplicated') {
-//         window.alert('标签名重复了');
-//       } else if (message === 'success') {
-//         window.alert('添加成功');
-//       }
-//     }
-//   },
-//   removeTag: (id: string) => {
-//     return tagModel.remove(id);
-//   },
-//
-//   updateTag: (id: string, name: string) => {
-//     return tagModel.update(id, name);
-//   },
-// }
-
 import createId from '@/lib/createId';
 
 const localStorageKeyName = 'tagList';
