@@ -17,6 +17,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
+import {mixins} from 'vue-class-component';
+import TagHelper from '@/mixins/TagHelper';
 
 @Component({
   computed: {
@@ -25,7 +27,7 @@ import {Component, Prop} from 'vue-property-decorator';
     }
   }
 })
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper) {
   @Prop() readonly dataSource!: string[];
   selectedTags: string[] = [];
 
