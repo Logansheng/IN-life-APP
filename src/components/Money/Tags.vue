@@ -14,11 +14,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, } from 'vue-property-decorator';
 import {mixins} from 'vue-class-component';
 import TagHelper from '@/mixins/TagHelper';
 @Component
 export default class Tags extends mixins(TagHelper) {
+
   selectedTags: string[] = [];
   get tagList() {
     return this.$store.state.tagList;
