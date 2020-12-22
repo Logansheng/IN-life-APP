@@ -6,6 +6,7 @@ type RecordItem = {
   time?: string;
 }
 type RootState = {
+  createRecordError: Error | null;
   recordList: RecordItem[];
   tagList: Tag[];
   currentTag?: Tag;
@@ -21,8 +22,4 @@ type  TagListModel = {
   remove: (id: string) => boolean;
   update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
   save: () => void;
-}
-
-interface Window {
-
 }

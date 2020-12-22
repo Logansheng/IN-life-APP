@@ -41,6 +41,7 @@ export default class Tabs extends Vue {
   font-size: 24px;
   display: flex;
 
+
    &-item{
     height: 64px;
     line-height: 64px;
@@ -48,6 +49,7 @@ export default class Tabs extends Vue {
     display: flex;
     justify-content: center;
     position: relative;
+
 
     &.selected::after {
       content: '';
