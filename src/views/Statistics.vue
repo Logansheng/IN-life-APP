@@ -60,18 +60,18 @@ export default class Statistics extends Vue {
     const {recordList} = this;
     const newList = clone(recordList)
       .filter(r => r.type === this.type)
-      .sort((a, b) => dayjs(b.time).valueOf() - dayjs(a.time).valueOf());
+      .sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
     if (newList.length === 0) {return [];}
 
     type Result = { title: string; total?: number; items: RecordItem[] }[]
-    const result: Result = [{title: dayjs(newList[0].time).format('YYYY-MM-DD'), items: [newList[0]]}];
+    const result: Result = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}];
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
-      if (dayjs(last.title).isSame(dayjs(current.time), 'day')) {
+      if (dayjs(last.title).isSame(dayjs(current.createAt), 'day')) {
         last.items.push(current);
       } else {
-        result.push({title: dayjs(current.time).format('YYYY-MM-DD'), items: [current]});
+        result.push({title: dayjs(current.createAt).format('YYYY-MM-DD'), items: [current]});
       }
     }
     result.map(group => {

@@ -3,7 +3,7 @@ type RecordItem = {
   notes: string;
   type: string;
   amount: number;
-  time?: string;
+  createAt?: string;
 }
 type RootState = {
   createRecordError: Error | null;
