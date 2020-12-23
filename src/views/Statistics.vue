@@ -1,9 +1,10 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :data-source="recordTypeLIst" :value.sync="type"></Tabs>
+    <Chart :options="x"></Chart>
     <ol v-if="groupedList.length>0">
       <li v-for="(group,index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }} <span>￥{{group.total}}</span></h3>
+        <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
         <ol>
           <li v-for="item in group.items" :key="item.id"
               class="record"
@@ -27,9 +28,13 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeLIst';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/component/tooltip'
+import Chart from '@/components/Chart.vue';
+
 
 @Component({
-  components: {Tabs},
+  components: {Tabs,Chart},
 })
 export default class Statistics extends Vue {
   beautify(string: string) {
@@ -46,9 +51,48 @@ export default class Statistics extends Vue {
       return dayjs(string).format('YYYY年M月D日');
     }
   }
-
+  get x(){
+    return{
+      title: {
+        text: '某站点用户访问来源',
+        subtext: '纯属虚构',
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        // formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+      },
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '60%'],
+          data: [
+            {value: 335, name: '直接访问'},
+            {value: 310, name: '邮件营销'},
+            {value: 234, name: '联盟广告'},
+            {value: 135, name: '视频广告'},
+            {value: 1548, name: '搜索引擎'}
+          ],
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    }
+  }
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? '无' : tags.map(t=>t.name).join(',');
+    return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
   }
 
   get recordList() {
@@ -93,14 +137,19 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.noResult{
+.echarts{
+  max-width: 100%;
+}
+.noResult {
   padding: 32px;
   text-align: center;
 }
+
 ::v-deep {
   .type-tabs-item {
     background: #C4C4C4;
     transition: all 1000ms;
+
     &.selected {
       background: white;
 

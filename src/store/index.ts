@@ -4,6 +4,7 @@ import clone from '@/lib/clone';
 import createId from '@/lib/createId';
 import router from '@/router';
 
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -68,7 +69,7 @@ const store = new Vuex.Store({
     createTag(state, name: string) {
       const names = state.tagList.map(item => item.name);
       if (names.indexOf(name) >= 0) {
-        window.alert('标签名重复了');
+       return window.alert('标签名重复了');
       }
       const id = createId().toString();
       state.tagList.push({id, name: name});
