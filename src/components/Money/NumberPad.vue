@@ -5,11 +5,15 @@
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button @click="remove">删除</button>
+      <button @click="remove">
+        <Icon name="close" class="remove"></Icon>
+      </button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
-      <button @click="clear">清空</button>
+      <button @click="clear">
+        <Icon name="clear"></Icon>
+      </button>
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
@@ -60,9 +64,9 @@ export default class NumberPad extends Vue {
   }
 
   ok() {
-    if(this.output==='0'){
-      return alert('金额不能为空哦')
-    }else {
+    if (this.output === '0') {
+      return alert('金额不能为空哦');
+    } else {
       const number = parseFloat(this.output);
       this.$emit('update:value', number);
       this.$emit('submit', number);
@@ -86,54 +90,65 @@ export default class NumberPad extends Vue {
     @extend %innerShadow;
   }
 
+  .remove {
+    height: 44px;
+    width: 44px;
+    color: #353535;
+  }
+
   .buttons {
     @extend %x;
 
     > button {
+      font-weight: bold;
+      font-size: 24px;
       width: 25%;
+      color: #353535;
       height: 64px;
       float: left;
       background: transparent;
       border: none;
-
+      border-radius: 10px;
+      @extend %outerShadow;
       &.ok {
-        height: 128px;
-        float: right;
-      }
+      height: 128px;
+      float: right;
+      background: #fdd552;
+    }
 
       &.zero {
         width: 50%;
       }
 
-      $bg: #f2f2f2;
-
-      &:nth-child(1) {
-        background: $bg;
-      }
-
-      &:nth-child(2), &:nth-child(5) {
-        background: darken($bg, 4%);
-      }
-
-      &:nth-child(3), &:nth-child(6), &:nth-child(9) {
-        background: darken($bg, 4*2%);
-      }
-
-      &:nth-child(4), &:nth-child(7), &:nth-child(10) {
-        background: darken($bg, 4*3%);
-      }
-
-      &:nth-child(8), &:nth-child(11), &:nth-child(13) {
-        background: darken($bg, 4*4%);
-      }
-
-      &:nth-child(14) {
-        background: darken($bg, 4*5%);
-      }
-
-      &:nth-child(12) {
-        background: darken($bg, 4*6%);
-      }
+      //$bg: #f2f2f2;
+      //
+      //&:nth-child(1) {
+      //  background: $bg;
+      //}
+      //
+      //&:nth-child(2), &:nth-child(5) {
+      //  background: darken($bg, 4%);
+      //}
+      //
+      //&:nth-child(3), &:nth-child(6), &:nth-child(9) {
+      //  background: darken($bg, 4*2%);
+      //}
+      //
+      //&:nth-child(4), &:nth-child(7), &:nth-child(10) {
+      //  background: darken($bg, 4*3%);
+      //}
+      //
+      //&:nth-child(8), &:nth-child(11), &:nth-child(13) {
+      //  background: darken($bg, 4*4%);
+      //}
+      //
+      //&:nth-child(14) {
+      //  background: darken($bg, 4*5%);
+      //}
+      //
+      //&:nth-child(12) {
+      //  background: darken($bg, 4*6%);
+      //}
     }
   }
 }

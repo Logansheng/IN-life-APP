@@ -1,11 +1,9 @@
 <template>
   <Layout class-prefix="layout">
     <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
-
     <Tabs :data-source="recordTypeList"
           :value.sync="record.type"
     ></Tabs>
-
     <div class="notes">
       <FormItem field-name="备注"
                 :value.sync="record.notes"
@@ -18,6 +16,7 @@
                 placeholder="在这里输入日期"/>
     </div>
     <Tags @update:value="record.tags= $event"/>
+
   </Layout>
 </template>
 
@@ -43,14 +42,6 @@ export default class Money extends Vue {
     tags: [], notes: '', type: '-', amount: 0,createAt: new Date().toISOString()
   };
 
-  created() {
-    this.$store.commit('fetchRecords');
-  }
-
-  onUpdateNotes(value: string) {
-    this.record.notes = value;
-  }
-
   saveRecord() {
     if (!this.record.tags || this.record.tags.length === 0) {
       return window.alert('请至少选择一个标签');
@@ -65,11 +56,12 @@ export default class Money extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 .layout-content {
-  display: flex;
-  flex-direction: column-reverse;
-}
+    display: flex;
+    flex-direction: column-reverse;
+    height: 80vh;
+  }
 
 .notes {
   padding: 12px 0;

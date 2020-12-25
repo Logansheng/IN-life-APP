@@ -1,4 +1,5 @@
 type RecordItem = {
+
   tags: Tag[];
   notes: string;
   type: string;
@@ -15,11 +16,11 @@ type Tag = {
   id: string;
   name: string;
 }
-type  TagListModel = {
-  data: Tag[];
-  fetch: () => Tag[];
-  create: (name: string) => 'success' | 'duplicated';
-  remove: (id: string) => boolean;
-  update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
-  save: () => void;
-}
+// type  TagListModel = {
+//   data: Tag[];
+//   fetch: () => Tag[];
+//   create: (name: string) => 'success' | 'duplicated';
+//   remove: (id: string) => boolean;
+//   update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
+//   save: () => void;
+// }

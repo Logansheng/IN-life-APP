@@ -44,7 +44,7 @@ export default class FormItem extends Vue {
 <style lang="scss" scoped>
 .notes {
   font-size: 14px;
-  padding: 8px 0 8px 16px;
+  padding: 4px 0 4px 16px;
   display: flex;
 
   .name {

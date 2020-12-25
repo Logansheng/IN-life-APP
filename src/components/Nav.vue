@@ -24,6 +24,7 @@ name: "Nav",
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 #nav {
+  height: 20%;
   padding: 6px;
   display: flex;
   flex-direction: row;
@@ -40,7 +41,6 @@ name: "Nav",
       width: 30px;
     }
   }
-
   > .router-link-active {
     color: $color-routercolor;
   }
