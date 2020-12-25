@@ -1,22 +1,24 @@
 <template>
-  <Layout>
-    <Tabs class-prefix="type" :data-source="recordTypeLIst" :value.sync="type"></Tabs>
-    <Chart :options="x"></Chart>
-    <ol v-if="groupedList.length>0">
-      <li v-for="(group,index) in groupedList" :key="index">
-        <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
-        <ol>
-          <li v-for="item in group.items" :key="item.id"
-              class="record"
-          >
-            <span>{{ tagString(item.tags) }}</span>
-            <span class="notes">{{ item.notes }}</span>
-            <span>￥{{ item.amount }} </span>
-          </li>
-        </ol>
-      </li>
-    </ol>
-    <div v-else class="noResult">暂无数据</div>
+  <Layout  >
+    <div class="parent">
+      <Tabs class-prefix="type" :data-source="recordTypeLIst" :value.sync="type"></Tabs>
+      <Chart :options="x"></Chart>
+      <ol v-if="groupedList.length>0" class="pra">
+        <li v-for="(group,index) in groupedList" :key="index">
+          <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
+          <ol >
+            <li v-for="item in group.items" :key="item.id"
+                class="record"
+            >
+              <span>{{ tagString(item.tags) }}</span>
+              <span class="notes">{{ item.notes }}</span>
+              <span>￥{{ item.amount }} </span>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div v-else class="noResult">暂无数据</div>
+    </div>
   </Layout>
 
 </template>
@@ -28,13 +30,14 @@ import Tabs from '@/components/Tabs.vue';
 import recordTypeList from '@/constants/recordTypeLIst';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
-import 'echarts/lib/chart/pie'
-import 'echarts/lib/component/tooltip'
+import 'echarts/lib/chart/pie';
+import 'echarts/lib/component/tooltip';
 import Chart from '@/components/Chart.vue';
+import _ from 'lodash';
 
-
+type Result = { title: string; total?: number; items: RecordItem[] }
 @Component({
-  components: {Tabs,Chart},
+  components: {Tabs, Chart},
 })
 export default class Statistics extends Vue {
   beautify(string: string) {
@@ -51,34 +54,43 @@ export default class Statistics extends Vue {
       return dayjs(string).format('YYYY年M月D日');
     }
   }
-  get x(){
-    return{
+
+  get x() {
+    console.log(this.recordList);
+    console.log('----');
+    const array= this.recordList.map(r=>_.pick(r,['type','amount']));
+    console.log(array);
+    const outCome =array.filter(i=>i.type==='-').map(i=>i.amount)
+      .reduce((v1,v2)=>{return   v1+v2})
+    console.log(outCome);
+    const inCome =array.filter(i=>i.type==='+').map(i=>i.amount)
+      .reduce((v1,v2)=>{return   v1+v2})
+    console.log(inCome);
+
+    return {
       title: {
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
-        left: 'center'
+        text: '统计图表',
+        left: 'right',
       },
       tooltip: {
         trigger: 'item',
-        // formatter: '{a} <br/>{b} : {c} ({d}%)'
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
       },
       legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+
       },
       series: [
+
         {
           name: '访问来源',
           type: 'pie',
           radius: '55%',
           center: ['50%', '60%'],
           data: [
-            {value: 335, name: '直接访问'},
-            {value: 310, name: '邮件营销'},
-            {value: 234, name: '联盟广告'},
-            {value: 135, name: '视频广告'},
-            {value: 1548, name: '搜索引擎'}
+            {value: outCome, name: '支出'},
+            {value: inCome, name: '收入'},
           ],
           emphasis: {
             itemStyle: {
@@ -89,16 +101,16 @@ export default class Statistics extends Vue {
           }
         }
       ]
-    }
-  }
+  }}
+
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
   }
 
   get recordList() {
+
     return (this.$store.state as RootState).recordList;
   }
-
 
   get groupedList() {
     const {recordList} = this;
@@ -107,8 +119,8 @@ export default class Statistics extends Vue {
       .sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
     if (newList.length === 0) {return [];}
 
-    type Result = { title: string; total?: number; items: RecordItem[] }[]
-    const result: Result = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+    const result: Result[] = [{title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]]}];
+
     for (let i = 1; i < newList.length; i++) {
       const current = newList[i];
       const last = result[result.length - 1];
@@ -137,9 +149,14 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.echarts{
+
+.echarts {
   max-width: 100%;
 }
+.parent{
+  height: 80vh;
+}
+
 .noResult {
   padding: 32px;
   text-align: center;
@@ -152,7 +169,6 @@ export default class Statistics extends Vue {
 
     &.selected {
       background: white;
-
       &::after {
         display: none;
       }
@@ -177,7 +193,9 @@ export default class Statistics extends Vue {
 }
 
 .record {
+  overflow: auto;
   background: white;
+
   @extend %item;
 }
 
@@ -186,6 +204,7 @@ export default class Statistics extends Vue {
   margin-right: auto;
   margin-left: 16px;
   color: #999;
+
 }
 
 
