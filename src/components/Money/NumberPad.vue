@@ -2,24 +2,24 @@
   <div class="NumberPad">
     <div class="output">{{ output }}</div>
     <div class="buttons">
-      <button @click="inputContent">1</button>
-      <button @click="inputContent">2</button>
-      <button @click="inputContent">3</button>
-      <button @click="remove">
+      <button class="choose" @click="inputContent">1</button>
+      <button class="choose" @click="inputContent">2</button>
+      <button class="choose" @click="inputContent">3</button>
+      <button class="choose" @click="remove">
         <Icon name="close" class="remove"></Icon>
       </button>
-      <button @click="inputContent">4</button>
-      <button @click="inputContent">5</button>
-      <button @click="inputContent">6</button>
-      <button @click="clear">
-        <Icon name="clear"></Icon>
+      <button class="choose" @click="inputContent">4</button>
+      <button class="choose" @click="inputContent">5</button>
+      <button class="choose" @click="inputContent">6</button>
+      <button class="choose" @click="clear">
+        <Icon name="clear" class="clear"></Icon>
       </button>
-      <button @click="inputContent">7</button>
-      <button @click="inputContent">8</button>
-      <button @click="inputContent">9</button>
-      <button class="ok" @click="ok">ok</button>
-      <button @click="inputContent" class="zero">0</button>
-      <button @click="inputContent">.</button>
+      <button class="choose" @click="inputContent">7</button>
+      <button class="choose" @click="inputContent">8</button>
+      <button class="choose" @click="inputContent">9</button>
+      <button  class="ok" @click="ok">ok</button>
+      <button  @click="inputContent" class="zero choose">0</button>
+      <button class="choose" @click="inputContent">.</button>
     </div>
   </div>
 </template>
@@ -88,17 +88,18 @@ export default class NumberPad extends Vue {
     text-align: right;
     height: 72px;
     @extend %innerShadow;
-  }
 
+  }
   .remove {
     height: 44px;
     width: 44px;
     color: #353535;
   }
-
   .buttons {
+    .choose:active{
+      background: #fdd552;
+    }
     @extend %x;
-
     > button {
       font-weight: bold;
       font-size: 24px;
@@ -120,37 +121,24 @@ export default class NumberPad extends Vue {
         width: 50%;
       }
 
-      //$bg: #f2f2f2;
-      //
-      //&:nth-child(1) {
-      //  background: $bg;
-      //}
-      //
-      //&:nth-child(2), &:nth-child(5) {
-      //  background: darken($bg, 4%);
-      //}
-      //
-      //&:nth-child(3), &:nth-child(6), &:nth-child(9) {
-      //  background: darken($bg, 4*2%);
-      //}
-      //
-      //&:nth-child(4), &:nth-child(7), &:nth-child(10) {
-      //  background: darken($bg, 4*3%);
-      //}
-      //
-      //&:nth-child(8), &:nth-child(11), &:nth-child(13) {
-      //  background: darken($bg, 4*4%);
-      //}
-      //
-      //&:nth-child(14) {
-      //  background: darken($bg, 4*5%);
-      //}
-      //
-      //&:nth-child(12) {
-      //  background: darken($bg, 4*6%);
-      //}
     }
   }
 }
-
+@keyframes wave{
+  0%{
+    transform: rotate(0deg);
+  }
+  33%{
+    transform: rotate(10deg);
+  }
+  66%{
+    transform: rotate(-10deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
+.clear:active{
+   animation: wave 200ms infinite;
+ }
 </style>

@@ -42,7 +42,7 @@ name: "Nav",
     }
   }
   > .router-link-active {
-    color: $color-routercolor;
+    color: #ffaa2d;
   }
     }
 </style>
