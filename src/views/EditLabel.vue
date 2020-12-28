@@ -78,13 +78,17 @@ export default class EditLabel extends Vue {
   > .leftIcon {
     width: 20px;
     height: 20px;
-    color: #666666;
+    color: #334b5c;
   }
 
   > .rightIcon {
     width: 24px;
     height: 24px;
   }
+
+}
+button{
+  background: #334b5c;
 }
 
 .form-wrapper {
@@ -93,6 +97,7 @@ export default class EditLabel extends Vue {
 }
 
 .button-wrapper {
+
   text-align: center;
   padding: 16px;
   margin-top: 44-16px;

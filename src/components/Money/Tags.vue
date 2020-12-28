@@ -1,9 +1,13 @@
 <template>
   <div class="tags">
+    <div>
+
+    </div>
     <div class="new">
-      <button @click="createTag">新增分类</button>
+      <button @click="createTag">新增标签</button>
     </div>
     <ul class="current">
+
       <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)">{{tag.name}}
@@ -66,7 +70,7 @@ export default class Tags extends mixins(TagHelper) {
       margin-right: 12px;
       margin-top: 4px;
       &.selected {
-        background: #fea92c;
+        background: #334b5c;
         color: white;
       }
     }

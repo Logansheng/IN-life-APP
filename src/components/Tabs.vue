@@ -56,8 +56,8 @@ export default class Tabs extends Vue {
       left: 0;
       height: 4px;
       position: absolute;
-      background: #fcd44d;
-
+      background: #fd7e79;
+      transition: all 1s;
     }
 
   }

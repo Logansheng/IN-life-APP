@@ -1,12 +1,13 @@
 <template>
-  <Layout  >
+  <Layout>
     <div class="parent">
       <Tabs class-prefix="type" :data-source="recordTypeLIst" :value.sync="type"></Tabs>
+      <div></div>
       <Chart :options="x"></Chart>
       <ol v-if="groupedList.length>0" class="pra">
         <li v-for="(group,index) in groupedList" :key="index">
           <h3 class="title">{{ beautify(group.title) }} <span>￥{{ group.total }}</span></h3>
-          <ol >
+          <ol>
             <li v-for="item in group.items" :key="item.id"
                 class="record"
             >
@@ -17,8 +18,11 @@
           </ol>
         </li>
       </ol>
-      <div v-else class="noResult">暂无数据</div>
+      <div v-else class="noResult">目前没有记录，请添加一笔哦</div>
+      <img src="../assets/icons/笔记本.png" alt="~~" class="hint" >
+
     </div>
+
   </Layout>
 
 </template>
@@ -56,38 +60,28 @@ export default class Statistics extends Vue {
   }
 
   get x() {
-    console.log(this.recordList);
-    console.log('----');
-    const array= this.recordList.map(r=>_.pick(r,['type','amount']));
-    console.log(array);
-    const outCome =array.filter(i=>i.type==='-').map(i=>i.amount)
-      .reduce((v1,v2)=>{return   v1+v2})
-    console.log(outCome);
-    const inCome =array.filter(i=>i.type==='+').map(i=>i.amount)
-      .reduce((v1,v2)=>{return   v1+v2})
-    console.log(inCome);
-
+    const array = this.recordList.map(r => _.pick(r, ['type', 'amount']));
+    const outCome = array.filter(i => i.type === '-').map(i => i.amount)
+      .reduce((v1, v2) => {return v1 + v2;}, 0);
+    const inCome = array.filter(i => i.type === '+').map(i => i.amount)
+      .reduce((v1, v2) => {return v1 + v2;}, 0);
     return {
-      title: {
-        text: '统计图表',
-        left: 'right',
-      },
+
       tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        formatter: '{b} : {c} ({d}%)'
       },
       legend: {
-        orient: 'vertical',
+        orient: 'horizontal',
         left: 'left',
 
       },
+      color: ['#f37570', '#80a9b0'],
       series: [
-
         {
-          name: '访问来源',
           type: 'pie',
           radius: '55%',
           center: ['50%', '60%'],
+
           data: [
             {value: outCome, name: '支出'},
             {value: inCome, name: '收入'},
@@ -101,14 +95,14 @@ export default class Statistics extends Vue {
           }
         }
       ]
-  }}
+    };
+  }
 
   tagString(tags: Tag[]) {
     return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
   }
 
   get recordList() {
-
     return (this.$store.state as RootState).recordList;
   }
 
@@ -153,8 +147,10 @@ export default class Statistics extends Vue {
 .echarts {
   max-width: 100%;
 }
-.parent{
+
+.parent {
   height: 80vh;
+  position: relative;
 }
 
 .noResult {
@@ -162,13 +158,27 @@ export default class Statistics extends Vue {
   text-align: center;
 }
 
+.hint {
+
+  position: absolute;
+  max-width: 80px;
+  opacity: 0.5;
+  right: 50%;
+  margin-right: -40px;
+}
+
+
 ::v-deep {
   .type-tabs-item {
-    background: #C4C4C4;
+    background: white;
     transition: all 1000ms;
+    //font-size: 20px;
+
 
     &.selected {
-      background: white;
+      background: #334b5c;
+      color: white;
+
       &::after {
         display: none;
       }

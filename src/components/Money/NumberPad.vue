@@ -11,13 +11,13 @@
       <button class="choose" @click="inputContent">4</button>
       <button class="choose" @click="inputContent">5</button>
       <button class="choose" @click="inputContent">6</button>
-      <button class="choose" @click="clear">
-        <Icon name="clear" class="clear"></Icon>
+      <button class="choose" @click="clear" >
+        <Icon name="clear" class="clear" ></Icon>
       </button>
       <button class="choose" @click="inputContent">7</button>
       <button class="choose" @click="inputContent">8</button>
       <button class="choose" @click="inputContent">9</button>
-      <button  class="ok" @click="ok">ok</button>
+      <button  class="ok" @click="ok"><span>ok</span></button>
       <button  @click="inputContent" class="zero choose">0</button>
       <button class="choose" @click="inputContent">.</button>
     </div>
@@ -81,6 +81,7 @@ export default class NumberPad extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .NumberPad {
+  color: #334b5c;
   .output {
     font-size: 36px;
     font-family: Consolas, monospace;
@@ -93,18 +94,18 @@ export default class NumberPad extends Vue {
   .remove {
     height: 44px;
     width: 44px;
-    color: #353535;
+    color: #334b5c;
   }
   .buttons {
     .choose:active{
-      background: #fdd552;
+      background: #fd7e79;
     }
     @extend %x;
     > button {
       font-weight: bold;
       font-size: 24px;
       width: 25%;
-      color: #353535;
+      color: #334b5c;
       height: 64px;
       float: left;
       background: transparent;
@@ -114,13 +115,13 @@ export default class NumberPad extends Vue {
       &.ok {
       height: 128px;
       float: right;
-      background: #fdd552;
+      background: #fd7e79;
+
     }
 
       &.zero {
         width: 50%;
       }
-
     }
   }
 }
@@ -139,6 +140,17 @@ export default class NumberPad extends Vue {
   }
 }
 .clear:active{
-   animation: wave 200ms infinite;
+   animation: wave 150ms infinite ;
  }
+@keyframes big {
+  0%{
+    font-size: 24px;
+  }
+  100%{
+    font-size: 36px;
+  }
+}
+.ok:active{
+  animation: big 150ms infinite ;
+}
 </style>

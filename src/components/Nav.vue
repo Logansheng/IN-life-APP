@@ -36,13 +36,14 @@ name: "Nav",
     display: flex;
     align-items: center;
     flex-direction: column;
+    color: #334b5c;
     >.icon{
       height: 30px;
       width: 30px;
     }
   }
   > .router-link-active {
-    color: #ffaa2d;
+    color: #d53a35;
   }
     }
 </style>
